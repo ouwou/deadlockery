@@ -1,0 +1,4 @@
+generated/*.cc
+generated/*.h
+cmake-build-*/
+.idea

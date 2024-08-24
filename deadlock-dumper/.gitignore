@@ -1,0 +1,4 @@
+*.user
+.vs/
+x64/
+deadlock-dumper/
