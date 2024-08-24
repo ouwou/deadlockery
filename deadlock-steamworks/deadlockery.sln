@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deadlockery", "deadlockery\deadlockery.csproj", "{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89B2F0AC-E9BF-4500-91AB-F6AE98790B16}
+	EndGlobalSection
+EndGlobal
