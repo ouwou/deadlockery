@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GenHTTP.Api" Version="8.6.0" />
+    <PackageReference Include="GenHTTP.Core" Version="8.6.0" />
+    <PackageReference Include="GenHTTP.Modules.Functional" Version="8.6.0" />
+    <PackageReference Include="GenHTTP.Modules.Layouting" Version="8.6.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeadlockAPI\DeadlockAPI.csproj" />
+  </ItemGroup>
+
+</Project>

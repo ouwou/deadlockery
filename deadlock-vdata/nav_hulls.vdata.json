@@ -1,0 +1,27 @@
+{
+  "Root": {
+    "generic_data_type": "CNavHullVData",
+    "small": {
+      "m_agentRadius": 24.0,
+      "m_agentHeight": 84.0,
+      "m_agentMaxClimb": 17.5,
+      "m_agentMaxJumpDownDist": 2000.0,
+      "m_agentMaxJumpHorizDistBase": 68.0,
+      "m_agentMaxJumpUpDist": 500.0
+    },
+    "medium": {
+      "m_agentRadius": 32.0,
+      "m_agentHeight": 84.0,
+      "m_agentMaxClimb": 15.5,
+      "m_agentMaxJumpDownDist": 2000.0,
+      "m_agentMaxJumpHorizDistBase": 68.0
+    },
+    "large": {
+      "m_agentRadius": 220.0,
+      "m_agentHeight": 84.0,
+      "m_agentMaxClimb": 40.0,
+      "m_agentMaxJumpDownDist": 2000.0,
+      "m_agentMaxJumpHorizDistBase": 68.0
+    }
+  }
+}

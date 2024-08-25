@@ -1,0 +1,27 @@
+{
+  "Root": {
+    "generic_data_type": "CitadelPingWheelMessagesVDATA_t",
+    "m_mapPingMessages": {
+      "CITADEL_PING_WHEEL_INPROGRESS": {
+        "0": "Going In",
+        "1": "Help",
+        "2": "Thanks",
+        "3": "Good Job",
+        "4": "Retreat",
+        "5": "Stay Together",
+        "6": "Need Plan",
+        "7": "On My Way"
+      },
+      "CITADEL_PING_WHEEL_DISABLED_WHILE_DEAD": {
+        "0": "Going In",
+        "1": "Help"
+      },
+      "CITADEL_PING_WHEEL_POSTGAME": {
+        "0": "Good Game (Post Game) - All Chat",
+        "1": "Good Job (Post Game) - All Chat",
+        "2": "Thanks (Post Game) - All Chat",
+        "3": "Well Played (Post Game) - All Chat"
+      }
+    }
+  }
+}

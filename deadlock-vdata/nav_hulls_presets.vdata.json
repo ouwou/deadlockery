@@ -1,0 +1,12 @@
+{
+  "Root": {
+    "generic_data_type": "CNavHullPresetVData",
+    "default": {
+      "m_vecNavHulls": {
+        "0": "small",
+        "1": "medium",
+        "2": "large"
+      }
+    }
+  }
+}

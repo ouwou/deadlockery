@@ -1,4 +1,5 @@
-﻿using ouwou.GC.Deadlock.Internal;
+﻿using DeadlockAPI;
+using ouwou.GC.Deadlock.Internal;
 
 namespace deadlockery
 {
@@ -18,13 +19,14 @@ namespace deadlockery
             client = new DeadlockClient(args[0], args[1]);
             testMatchId = uint.Parse(args[2]);
 
-            client.ClientWelcomeEvent += OnWelcome;
-            client.GetMatchMetaDataResponseEvent += OnGetMatchMetaDataResponse;
+            // client.ClientWelcomeEvent += OnWelcome;
+            // client.GetMatchMetaDataResponseEvent += OnGetMatchMetaDataResponse;
 
             client.Connect();
             client.Wait();
         }
 
+        /*
         private static void OnGetMatchMetaDataResponse(object? sender, DeadlockClient.GetMatchMetaDataResponseEventArgs e)
         {
             if (e.Data.result != CMsgClientToGCGetMatchMetaDataResponse.EResult.k_eResult_Success)
@@ -40,6 +42,6 @@ namespace deadlockery
         private static void OnWelcome(object? sender, DeadlockClient.ClientWelcomeEventArgs e)
         {
             client.GetMatchMetaData(testMatchId);
-        }
+        }*/
     }
 }

@@ -1,0 +1,401 @@
+{
+  "Root": {
+    "generic_data_type": "CitadelGenericData_t",
+    "m_mapDamageFlash": {
+      "EFlashType_BulletDamage": {
+        "m_flDuration": 0.25,
+        "m_flCoverage": 0.5,
+        "m_flHardness": 0.7,
+        "m_flBrightness": 1.2,
+        "m_Color": {
+          "0": 255,
+          "1": 0,
+          "2": 0
+        }
+      },
+      "EFlashType_TechDamage": {
+        "m_flDuration": 0.25,
+        "m_flCoverage": 0.5,
+        "m_flHardness": 0.5,
+        "m_flBrightness": 1.5,
+        "m_Color": {
+          "0": 35,
+          "1": 17,
+          "2": 236
+        }
+      },
+      "EFlashType_Healing": {
+        "m_flDuration": 1.0,
+        "m_flCoverage": 0.5,
+        "m_flHardness": 0.0,
+        "m_flBrightness": 1.2,
+        "m_Color": {
+          "0": 0,
+          "1": 195,
+          "2": 45
+        },
+        "m_flBrightnessInLightSensitivityMode": 0.6
+      },
+      "EFlashType_CritDamage": {
+        "m_flDuration": 0.33,
+        "m_flCoverage": 0.6,
+        "m_flHardness": 0.9,
+        "m_flBrightness": 1.7,
+        "m_Color": {
+          "0": 255,
+          "1": 255,
+          "2": 0
+        }
+      },
+      "EFlashType_MeleeActivate": {
+        "m_flDuration": 0.275,
+        "m_flCoverage": 0.5,
+        "m_Color": {
+          "0": 254,
+          "1": 101,
+          "2": 40
+        },
+        "m_flBrightness": 3.0,
+        "m_flHardness": 0.0
+      }
+    },
+    "m_GlitchSettings": {
+      "m_flStrength": 1.0,
+      "m_nQuantizeType": 2.0,
+      "m_flQuantizeScale": 0.5,
+      "m_flQuantizeStrength": 0.2,
+      "m_flFrameRate": 5.0,
+      "m_flSpeed": 10.0,
+      "m_flJumpStrength": 1.0,
+      "m_flDistortStrength": 1.25,
+      "m_flWhiteNoiseStrength": 3.0,
+      "m_flScanlineStrength": 1.5,
+      "m_flBreakupStrength": 0.0
+    },
+    "m_LaneInfo": {
+      "0": {
+        "m_strLaneName": "Yellow",
+        "m_strCSSClass": "yellowLane",
+        "m_Color": {
+          "0": 200,
+          "1": 200,
+          "2": 0
+        },
+        "m_MinimapColorOverride": {
+          "0": 255,
+          "1": 255,
+          "2": 0
+        }
+      },
+      "1": {
+        "m_strLaneName": "Yellow + Orange",
+        "m_Color": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        }
+      },
+      "2": {
+        "m_strLaneName": "Orange",
+        "m_strCSSClass": "orangeLane",
+        "m_Color": {
+          "0": 220,
+          "1": 79,
+          "2": 0
+        },
+        "m_MinimapColorOverride": {
+          "0": 255,
+          "1": 93,
+          "2": 0
+        }
+      },
+      "3": {
+        "m_strLaneName": "Blue",
+        "m_strCSSClass": "blueLane",
+        "m_Color": {
+          "0": 17,
+          "1": 174,
+          "2": 255
+        }
+      },
+      "4": {
+        "m_strLaneName": " + Purple",
+        "m_Color": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        }
+      },
+      "5": {
+        "m_strLaneName": "Purple",
+        "m_strCSSClass": "purpleLane",
+        "m_Color": {
+          "0": 255,
+          "1": 6,
+          "2": 255
+        }
+      }
+    },
+    "m_NoLaneZip": {
+      "m_strLaneName": "NoLane",
+      "m_strCSSClass": "noLane",
+      "m_Color": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      }
+    },
+    "m_DamageReceivedSounds": {
+      "m_strDamageReceiveDefault": "Damage.Receive.Default",
+      "m_strDamageReceiveNPC": "Damage.Receive.NPC",
+      "m_strDamageReceiveDOT": "Damage.Receive.DOT",
+      "m_strDamageReceiveMeleeNPC": "Damage.Receive.Melee.NPC",
+      "m_strDamageReceiveMelee": "Damage.Receive.Melee",
+      "m_strDamageReceiveShield": "Damage.Receive.Shield"
+    },
+    "m_mapDamageIndicatorParamSets": {
+      "EDamageIndicatorSet_Normal": {
+        "m_strDamageDealtNormal": "HitIndicator.Base",
+        "m_strDamageDealtPoison": "HitIndicator.Poison",
+        "m_strDamageDealtToInvuln": "HitIndicator.Invulnerable",
+        "m_strDamageDealtToShield": "HitIndicator.Shield",
+        "m_strDamageDealtCrit": "HitIndicator.Crit",
+        "m_strDamageDealtBuffed": "HitIndicator.BuffedShot",
+        "m_strDamageDealtToLowArmor": "HitIndicator.Armor.Low",
+        "m_strDamageDealtToMediumArmor": "HitIndicator.Armor.Med",
+        "m_strDamageDealtToHighArmor": "HitIndicator.Armor.High"
+      },
+      "EDamageIndicatorSet_MinionDealt": {
+        "m_strDamageDealtNormal": "HitIndicator.Base.Attenuated",
+        "m_strDamageDealtToInvuln": "HitIndicator.Invulnerable.Attenuated",
+        "m_strDamageDealtToShield": "HitIndicator.Shield.Attenuated",
+        "m_strDamageDealtCrit": "HitIndicator.Crit.Attenuated",
+        "m_strDamageDealtBuffed": "HitIndicator.BuffedShot.Attenuated",
+        "m_strDamageDealtToLowArmor": "HitIndicator.Armor.Low.Attenuated",
+        "m_strDamageDealtToMediumArmor": "HitIndicator.Armor.Med.Attenuated",
+        "m_strDamageDealtToHighArmor": "HitIndicator.Armor.High.Attenuated",
+        "m_strDamageDealtPoison": "HitIndicator.Poison.Attenuated"
+      },
+      "EDamageIndicatorSet_DOT": {
+        "m_strDamageDealtNormal": "HitIndicator.Base.Attenuated",
+        "m_strDamageDealtToInvuln": "HitIndicator.Invulnerable.Attenuated",
+        "m_strDamageDealtToShield": "HitIndicator.Shield.Attenuated",
+        "m_strDamageDealtCrit": "HitIndicator.Crit.Attenuated",
+        "m_strDamageDealtBuffed": "HitIndicator.BuffedShot.Attenuated",
+        "m_strDamageDealtToLowArmor": "HitIndicator.Armor.Low.Attenuated",
+        "m_strDamageDealtToMediumArmor": "HitIndicator.Armor.Med.Attenuated",
+        "m_strDamageDealtToHighArmor": "HitIndicator.Armor.High.Attenuated",
+        "m_strDamageDealtPoison": "HitIndicator.Poison.Attenuated"
+      },
+      "EDamageIndicatorSet_TroopersAndNeutrals": {
+        "m_strDamageDealtNormal": "HitIndicator.Base.Attenuated",
+        "m_strDamageDealtCrit": "HitIndicator.Crit.Attenuated",
+        "m_strDamageDealtPoison": "HitIndicator.Poison.Attenuated",
+        "m_strDamageDealtToInvuln": "HitIndicator.Invulnerable.Attenuated",
+        "m_strDamageDealtToShield": "HitIndicator.Shield.Attenuated",
+        "m_strDamageDealtToLowArmor": "HitIndicator.Armor.Low.Attenuated",
+        "m_strDamageDealtToMediumArmor": "HitIndicator.Armor.Med.Attenuated",
+        "m_strDamageDealtToHighArmor": "HitIndicator.Armor.High.Attenuated",
+        "m_strDamageDealtBuffed": "HitIndicator.BuffedShot.Attenuated"
+      }
+    },
+    "m_DefaultDOF": {
+      "m_flDofNearBlurry": 0.0,
+      "m_flDofNearCrisp": 0.0,
+      "m_flDofFarBlurry": 0.0,
+      "m_flDofFarCrisp": 0.0
+    },
+    "m_NewPlayerMetrics": {
+      "0": {
+        "m_strSkillTierName": "Bronze",
+        "m_NetWorth": 1000,
+        "m_DamageTaken": 6600,
+        "m_BossDamage": 300,
+        "m_PlayerDamage": 900,
+        "m_LastHits": 1,
+        "m_OrbsSecured": 1,
+        "m_OrbsDenied": 1,
+        "m_AbilitiesUpgraded": 1,
+        "m_ModsPurchased": 1
+      },
+      "1": {
+        "m_strSkillTierName": "Silver",
+        "m_NetWorth": 1000,
+        "m_DamageTaken": 5800,
+        "m_BossDamage": 400,
+        "m_PlayerDamage": 1400,
+        "m_LastHits": 1,
+        "m_OrbsSecured": 1,
+        "m_OrbsDenied": 1,
+        "m_AbilitiesUpgraded": 1,
+        "m_ModsPurchased": 1
+      },
+      "2": {
+        "m_strSkillTierName": "Gold",
+        "m_NetWorth": 1000,
+        "m_DamageTaken": 5000,
+        "m_BossDamage": 600,
+        "m_PlayerDamage": 1800,
+        "m_LastHits": 1,
+        "m_OrbsSecured": 1,
+        "m_OrbsDenied": 1,
+        "m_AbilitiesUpgraded": 1,
+        "m_ModsPurchased": 1
+      },
+      "3": {
+        "m_strSkillTierName": "Platinum",
+        "m_NetWorth": 1000,
+        "m_DamageTaken": 4600,
+        "m_BossDamage": 700,
+        "m_PlayerDamage": 2300,
+        "m_LastHits": 1,
+        "m_OrbsSecured": 1,
+        "m_OrbsDenied": 1,
+        "m_AbilitiesUpgraded": 1,
+        "m_ModsPurchased": 1
+      }
+    },
+    "m_MinimapTeamRebelsColor": {
+      "0": 58,
+      "1": 91,
+      "2": 66
+    },
+    "m_MinimapTeamCombineColor": {
+      "0": 83,
+      "1": 51,
+      "2": 51
+    },
+    "m_HeroTestingTargetDummyUpgrades": {
+      "0": "upgrade_toughness_2",
+      "1": "upgrade_health_regen_1",
+      "2": "upgrade_toughness_3",
+      "3": "upgrade_health_percent_large",
+      "4": "upgrade_out_of_combat_health_regen",
+      "5": "upgrade_zipine_mastery"
+    },
+    "m_mapStatTypeImages": {
+      "EBaseHealthRegen": "file://{images}/upgrades/mods_armor/health_regen.psd",
+      "EBulletArmorDamageReduction": "file://{images}/upgrades/mods_armor/bullet_armor.psd",
+      "ETechArmorDamageReduction": "file://{images}/upgrades/mods_armor/tech_armor.psd"
+    },
+    "m_nItemPricePerTier": {
+      "0": 0,
+      "1": 500,
+      "2": 1250,
+      "3": 3000,
+      "4": 6300
+    },
+    "m_AimSpringStrength": {
+      "0": 0.0,
+      "1": 2.0,
+      "2": 10.0,
+      "3": 300.0
+    },
+    "m_TargetingSpringStrength": {
+      "0": 0.0,
+      "1": 2.0,
+      "2": 10.0,
+      "3": 30.0
+    },
+    "m_IdolParams": {
+      "m_IdolModel": "models/props_gameplay/idol_urn/idol_urn.vmdl",
+      "m_strLoopingSequenceName": "golden_idol_idle",
+      "m_ParachuteModel": "models/props_gameplay/gold_crate_parachute.vmdl",
+      "m_CrateModel": "models/props_gameplay/gold_crate.vmdl",
+      "m_IdolReturnLocationParticle": "particles/environment/soul_jar_return_location.vpcf",
+      "m_flIdolReturnLocationParticleScale": 2.0,
+      "m_IdolSpawnLocationParticle": "particles/environment/soul_jar_summon.vpcf",
+      "m_IdolDroppingParticle": "particles/environment/soul_jar_drop.vpcf",
+      "m_flIdolDropHeight": 1800.0,
+      "m_flIdolDropDuration": 25
+    },
+    "m_TeleporterParams": {
+      "m_StartEffect": "particles/environment/teleporter_pad_start.vpcf",
+      "m_EndEffect": "particles/environment/teleporter_pad_end.vpcf",
+      "m_strEnterSound": "Teleport.Enter",
+      "m_strStartSound": "Teleport.Buildup"
+    },
+    "m_CurrencyTypeSounds": {
+      "EAbilityPoints": {
+        "m_mapSourceSounds": {
+          "EBossKill": "Player.AcquireAp",
+          "ECheats": "Player.AcquireAp",
+          "ELevelUp": "Player.AcquireAp"
+        }
+      },
+      "EGold": {
+        "m_mapSourceSounds": {
+          "EItemSale": "",
+          "ETreasureChest": "",
+          "EOrbPlayer": "Player.ClaimOrb",
+          "EOrbDeny": "Player.ClaimOrb",
+          "EOrbLaneTrooper": "Player.ClaimOrb",
+          "EOrbNeutralTrooper": "Player.ClaimOrb",
+          "EOrbTier1TrooperBoss": "Player.ClaimOrb",
+          "EOrbTier2TrooperBoss": "Player.ClaimOrb",
+          "EOrbTier3TrooperBoss": "Player.ClaimOrb",
+          "EOrbBaseSentry": "Player.ClaimOrb",
+          "EOrbDeployable": "Player.ClaimOrb",
+          "EOrbTrophyKill": "Player.ClaimOrb",
+          "EOrbTreasureChest": "Player.ClaimOrb",
+          "ENeutralWorldPickup": "Neutral.Bounty.Pickup",
+          "EItemPurchase": "Player.PurchaseUpgrade",
+          "EItemUpgrade": "Player.PurchaseUpgrade"
+        }
+      }
+    },
+    "m_UISounds": {
+      "EMainMenuHover": "UI.MainMenu.Hover",
+      "EMainMenuActivate": "UI.MainMenu.Activate",
+      "ESocialMenuActivate": "Citadel_UI.SocialMenu_Activate",
+      "EAbilityHover": "UI.Shop.Ability.Hover",
+      "EShopModHover": "UI.Shop.Mod.Hover",
+      "EShopModDestroy": "UI.Shop.Item.Destroy",
+      "EShopModActivate": "UI.Shop.Mod.Activate",
+      "EShopExitAlarm": "UI.Shop.ExitAlarm",
+      "EShopExit": "UI.Shop.Exit",
+      "EShopEnter": "UI.Shop.Enter",
+      "EHeroCardHover": "UI.HeroCard.Hover",
+      "EHeroCardActivate": "UI.HeroCard.Activate",
+      "EClearRosterHover": "UI.HeroCard.ClearRoster.Hover",
+      "EClearRosterActivate": "UI.HeroCard.ClearRoster.Activate",
+      "EShopFilterFavoritesClicked": "UI.Shop.Mod.Starred.Click",
+      "EShopFilterMagicClicked": "UI.Shop.Mod.Magic.Click",
+      "EShopFilterVitalityClicked": "UI.Shop.Mod.Vitality.Click",
+      "EShopFilterWeaponClicked": "UI.Shop.Mod.Weapon.Click",
+      "EMainMenuPartyInvited": "Menu.Party.Invited",
+      "EMainMenuPartyLeave": "Menu.Party.Leave",
+      "EMainMenuPartyNewMember": "Menu.Party.NewMember",
+      "EMainMenuPartyPickHeroesEnter": "Menu.HeroSelection.Enter",
+      "EMainMenuPartyPickHeroesConfirm": "Menu.HeroSelection.Complete",
+      "EMainMenuPartyPickHeroesExit": "UI.Matchmake.Find"
+    },
+    "m_mapResourceTypes": {
+      "EResourceType_Rage": {
+        "m_strHUDSnippetName": "rage",
+        "m_strCantCastOutOfResourceToken": "#CITADEL_ABILITY_INVALID_NOT_RAGE"
+      }
+    },
+    "m_HealingReceivedSounds": {
+      "m_strHealingInBaseLoop": "Player.Heal.Base",
+      "m_strHealingInBaseToppedOff": "Player.Heal.BaseEnd",
+      "m_strDirectHealing": ""
+    },
+    "m_DamageIndicatorSounds": {
+      "m_strDamageDefault": "Damage.Send",
+      "m_strDamageCrit": "Damage.Send.Crit",
+      "m_strDamageLethal": "Damage.Send.Lethal",
+      "m_strDamageInvulnerable": "Damage.Send.Invulnerable",
+      "m_strDamageDOT": "Damage.Send.DOT",
+      "m_strDamageHealthTransfer": "Player.Heal.SiphonTick"
+    },
+    "m_RejuvParams": {
+      "m_flRejuvinatorExpirationWarningTiming": 30,
+      "m_flRejuvinatorBuffDuration": 180,
+      "m_flRejuvinatorDropHeight": 752,
+      "m_flRejuvinatorDropDuration": 9,
+      "m_strRejuvPickupSound": "Rejuv.Pickup"
+    },
+    "m_ShoppingEffect": "particles/generic/hero_shopping_status.vpcf"
+  }
+}
