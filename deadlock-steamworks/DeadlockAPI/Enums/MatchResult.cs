@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeadlockAPI.Enums
 {
-    enum MatchResult
+    public enum MatchResult
     {
         Win = 1,
         Loss = 0,

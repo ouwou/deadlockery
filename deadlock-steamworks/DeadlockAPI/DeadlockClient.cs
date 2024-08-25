@@ -48,12 +48,22 @@ namespace DeadlockAPI
             client.Connect();
         }
 
+        public void Disconnect()
+        {
+            client.Disconnect();
+        }
+
         public void Wait()
         {
             while (true)
             {
                 callbackMgr.RunWaitCallbacks(TimeSpan.FromSeconds(1));
             }
+        }
+
+        public void RunCallbacks(TimeSpan t)
+        {
+            callbackMgr.RunWaitCallbacks(t);
         }
 
         async void OnConnected(SteamClient.ConnectedCallback callback)
@@ -116,8 +126,6 @@ namespace DeadlockAPI
 
         void OnGCMessage(SteamGameCoordinator.MessageCallback callback)
         {
-            // Console.WriteLine("{0}", callback.EMsg);
-
             var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
             {
                 { (uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, OnClientWelcome },
@@ -133,15 +141,43 @@ namespace DeadlockAPI
             func(callback.Message);
         }
 
-        public async Task<CMsgClientToGCGetMatchMetaDataResponse> GetMatchMetaData(uint matchId)
+        public async Task<U> SendAndReceiveWithJob<T, U>(ClientGCMsgProtobuf<T> msg)
+            where T : ProtoBuf.IExtensible, new()
+            where U : ProtoBuf.IExtensible, new()
+        {
+            msg.SourceJobID = client.GetNextJobID();
+            gameCoordinator.Send(msg, APPID);
+            var cb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
+            var response = new ClientGCMsgProtobuf<U>(cb.Message);
+            return response.Body;
+        }
+
+        public class MatchMetaData
+        {
+            public required CMsgClientToGCGetMatchMetaDataResponse Data;
+            public required string ReplayURL;
+            public required string MetadataURL;
+        }
+
+        public async Task<MatchMetaData?> GetMatchMetaData(uint matchId)
         {
             var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetMatchMetaData>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetMatchMetaData);
-            msg.SourceJobID = client.GetNextJobID();
             msg.Body.match_id = matchId;
-            gameCoordinator.Send(msg, APPID);
-            var responsecb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
-            var response = new ClientGCMsgProtobuf<CMsgClientToGCGetMatchMetaDataResponse>(responsecb.Message);
-            return response.Body;
+            var r = await SendAndReceiveWithJob<CMsgClientToGCGetMatchMetaData, CMsgClientToGCGetMatchMetaDataResponse>(msg);
+            if (r == null) return null;
+            return new MatchMetaData()
+            {
+                Data = r,
+                ReplayURL = $"http://replay{r.cluster_id}.valve.net/{APPID}/{matchId}_{r.replay_salt}.dem.bz2",
+                MetadataURL = $"http://replay{r.cluster_id}.valve.net/{APPID}/{matchId}_{r.metadata_salt}.meta.bz2"
+            };
+        }
+
+        public async Task<CMsgClientToGCGetGlobalMatchHistoryResponse?> GetGlobalMatchHistory(uint cursor = 0)
+        {
+            var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetGlobalMatchHistory>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetGlobalMatchHistory);
+            msg.Body.cursor = cursor;
+            return await SendAndReceiveWithJob<CMsgClientToGCGetGlobalMatchHistory, CMsgClientToGCGetGlobalMatchHistoryResponse>(msg);
         }
 
         public class ClientWelcomeEventArgs : EventArgs

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeadlockAPI.Enums
 {
-    enum Heroes
+    public enum Heroes
     {
         Abrams = 6,
         Bebop = 15,

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "deadlockery", "deadlockery\deadlockery.csproj", "{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeadlockAPIExample", "deadlockery\DeadlockAPIExample.csproj", "{CDC32601-3FA5-4BD0-915B-6DA0177D42A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlockAPI", "DeadlockAPI\DeadlockAPI.csproj", "{97C86B61-AA76-4B67-8C20-E3A9EEB6D273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeadlockAPI", "DeadlockAPI\DeadlockAPI.csproj", "{97C86B61-AA76-4B67-8C20-E3A9EEB6D273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlockMatchInfoServer", "DeadlockMatchInfoServer\DeadlockMatchInfoServer.csproj", "{84ABE640-EC2C-49C4-8A0C-977780D9D79F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeadlockMatchInfoServer", "DeadlockMatchInfoServer\DeadlockMatchInfoServer.csproj", "{84ABE640-EC2C-49C4-8A0C-977780D9D79F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlockMatchScraper", "DeadlockMatchScraper\DeadlockMatchScraper.csproj", "{D8947AE8-9655-4B84-B8F8-170EB706006F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{84ABE640-EC2C-49C4-8A0C-977780D9D79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84ABE640-EC2C-49C4-8A0C-977780D9D79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84ABE640-EC2C-49C4-8A0C-977780D9D79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
