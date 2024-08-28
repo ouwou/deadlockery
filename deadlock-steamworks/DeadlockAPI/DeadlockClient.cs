@@ -4,10 +4,8 @@ using SteamKit2.Authentication;
 using SteamKit2.GC;
 using SteamKit2.Internal;
 
-namespace DeadlockAPI
-{
-    public class DeadlockClient
-    {
+namespace DeadlockAPI {
+    public class DeadlockClient {
         SteamClient client;
 
         SteamUser user;
@@ -19,10 +17,11 @@ namespace DeadlockAPI
         string password;
         string previouslyStoredGuardData;
 
+        bool disconnecting = false;
+
         const int APPID = 1422450;
 
-        public DeadlockClient(string userName, string password)
-        {
+        public DeadlockClient(string userName, string password) {
             this.userName = userName;
             this.password = password;
 
@@ -37,41 +36,38 @@ namespace DeadlockAPI
             callbackMgr.Subscribe<SteamUser.LoggedOnCallback>(OnLoggedOn);
             callbackMgr.Subscribe<SteamGameCoordinator.MessageCallback>(OnGCMessage);
 
-            previouslyStoredGuardData = File.ReadAllText("guard.txt");
+            if (File.Exists("guard.txt")) {
+                previouslyStoredGuardData = File.ReadAllText("guard.txt");
+            }
         }
 
         public bool IsConnected { get => client.IsConnected; }
 
-        public void Connect()
-        {
+        public void Connect() {
             Console.WriteLine("Connecting to Steam");
+            disconnecting = false;
             client.Connect();
         }
 
-        public void Disconnect()
-        {
+        public void Disconnect() {
+            disconnecting = true;
             client.Disconnect();
         }
 
-        public void Wait()
-        {
-            while (true)
-            {
+        public void Wait() {
+            while (true) {
                 callbackMgr.RunWaitCallbacks(TimeSpan.FromSeconds(1));
             }
         }
 
-        public void RunCallbacks(TimeSpan t)
-        {
+        public void RunCallbacks(TimeSpan t) {
             callbackMgr.RunWaitCallbacks(t);
         }
 
-        async void OnConnected(SteamClient.ConnectedCallback callback)
-        {
+        async void OnConnected(SteamClient.ConnectedCallback callback) {
             Console.WriteLine("Connected! Logging into Steam as {0}", userName);
 
-            var authSession = await client.Authentication.BeginAuthSessionViaCredentialsAsync(new AuthSessionDetails
-            {
+            var authSession = await client.Authentication.BeginAuthSessionViaCredentialsAsync(new AuthSessionDetails {
                 Username = userName,
                 Password = password,
                 IsPersistentSession = true,
@@ -79,30 +75,27 @@ namespace DeadlockAPI
                 Authenticator = new UserConsoleAuthenticator(),
             });
             var pollResponse = await authSession.PollingWaitForResultAsync();
-            if (pollResponse.NewGuardData != null)
-            {
+            if (pollResponse.NewGuardData != null) {
                 previouslyStoredGuardData = pollResponse.NewGuardData;
                 File.WriteAllText("guard.txt", previouslyStoredGuardData);
             }
-            user.LogOn(new SteamUser.LogOnDetails
-            {
+            user.LogOn(new SteamUser.LogOnDetails {
                 Username = pollResponse.AccountName,
                 AccessToken = pollResponse.RefreshToken,
                 ShouldRememberPassword = true,
             });
         }
 
-        void OnDisconnected(SteamClient.DisconnectedCallback callback)
-        {
-            Console.WriteLine("Disconnected :(\nTrying again in 10s");
-            Thread.Sleep(10000);
-            Connect();
+        void OnDisconnected(SteamClient.DisconnectedCallback callback) {
+            if (!disconnecting) {
+                Console.WriteLine("Disconnected :(\nTrying again in 10s");
+                Thread.Sleep(10000);
+                Connect();
+            }
         }
 
-        void OnLoggedOn(SteamUser.LoggedOnCallback callback)
-        {
-            if (callback.Result != EResult.OK)
-            {
+        void OnLoggedOn(SteamUser.LoggedOnCallback callback) {
+            if (callback.Result != EResult.OK) {
                 Console.WriteLine("Unable to log on to Steam: {0}", callback.Result);
                 return;
             }
@@ -110,8 +103,7 @@ namespace DeadlockAPI
             Console.WriteLine("Logged in! Launching Deadlock");
 
             var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
-            playGame.Body.games_played.Add(new CMsgClientGamesPlayed.GamePlayed
-            {
+            playGame.Body.games_played.Add(new CMsgClientGamesPlayed.GamePlayed {
                 game_id = new GameID(APPID)
             });
 
@@ -124,8 +116,7 @@ namespace DeadlockAPI
             gameCoordinator.Send(clientHello, APPID);
         }
 
-        void OnGCMessage(SteamGameCoordinator.MessageCallback callback)
-        {
+        void OnGCMessage(SteamGameCoordinator.MessageCallback callback) {
             var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
             {
                 { (uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, OnClientWelcome },
@@ -133,8 +124,7 @@ namespace DeadlockAPI
             };
 
             Action<IPacketGCMsg> func;
-            if (!messageMap.TryGetValue(callback.EMsg, out func))
-            {
+            if (!messageMap.TryGetValue(callback.EMsg, out func)) {
                 return;
             }
 
@@ -143,8 +133,7 @@ namespace DeadlockAPI
 
         public async Task<U> SendAndReceiveWithJob<T, U>(ClientGCMsgProtobuf<T> msg)
             where T : ProtoBuf.IExtensible, new()
-            where U : ProtoBuf.IExtensible, new()
-        {
+            where U : ProtoBuf.IExtensible, new() {
             msg.SourceJobID = client.GetNextJobID();
             gameCoordinator.Send(msg, APPID);
             var cb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
@@ -152,52 +141,49 @@ namespace DeadlockAPI
             return response.Body;
         }
 
-        public class MatchMetaData
-        {
+        public class MatchMetaData {
             public required CMsgClientToGCGetMatchMetaDataResponse Data;
             public required string ReplayURL;
             public required string MetadataURL;
         }
 
-        public async Task<MatchMetaData?> GetMatchMetaData(uint matchId)
-        {
+        public async Task<MatchMetaData?> GetMatchMetaData(uint matchId) {
             var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetMatchMetaData>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetMatchMetaData);
             msg.Body.match_id = matchId;
             var r = await SendAndReceiveWithJob<CMsgClientToGCGetMatchMetaData, CMsgClientToGCGetMatchMetaDataResponse>(msg);
             if (r == null) return null;
-            return new MatchMetaData()
-            {
+            return new MatchMetaData() {
                 Data = r,
                 ReplayURL = $"http://replay{r.cluster_id}.valve.net/{APPID}/{matchId}_{r.replay_salt}.dem.bz2",
                 MetadataURL = $"http://replay{r.cluster_id}.valve.net/{APPID}/{matchId}_{r.metadata_salt}.meta.bz2"
             };
         }
 
-        public async Task<CMsgClientToGCGetGlobalMatchHistoryResponse?> GetGlobalMatchHistory(uint cursor = 0)
-        {
+        public async Task<CMsgClientToGCGetGlobalMatchHistoryResponse?> GetGlobalMatchHistory(uint cursor = 0) {
             var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetGlobalMatchHistory>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetGlobalMatchHistory);
             msg.Body.cursor = cursor;
             return await SendAndReceiveWithJob<CMsgClientToGCGetGlobalMatchHistory, CMsgClientToGCGetGlobalMatchHistoryResponse>(msg);
         }
 
-        public class ClientWelcomeEventArgs : EventArgs
-        {
+        public async Task<CMsgClientToGCGetActiveMatchesResponse?> GetActiveMatches() {
+            var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetActiveMatches>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetActiveMatches);
+            return await SendAndReceiveWithJob<CMsgClientToGCGetActiveMatches, CMsgClientToGCGetActiveMatchesResponse>(msg);
+        }
+
+        public class ClientWelcomeEventArgs : EventArgs {
             public required CMsgClientWelcome Data;
         }
         public event EventHandler<ClientWelcomeEventArgs> ClientWelcomeEvent;
-        void OnClientWelcome(IPacketGCMsg packetMsg)
-        {
+        void OnClientWelcome(IPacketGCMsg packetMsg) {
             var msg = new ClientGCMsgProtobuf<CMsgClientWelcome>(packetMsg);
             ClientWelcomeEvent?.Invoke(this, new ClientWelcomeEventArgs() { Data = msg.Body });
         }
 
-        public class DevPlaytestStatusEventArgs : EventArgs
-        {
+        public class DevPlaytestStatusEventArgs : EventArgs {
             public required CMsgGCToClientDevPlaytestStatus Data;
         }
         public event EventHandler<DevPlaytestStatusEventArgs> DevPlaytestStatusEvent;
-        void OnDevPlaytestStatus(IPacketGCMsg packetMsg)
-        {
+        void OnDevPlaytestStatus(IPacketGCMsg packetMsg) {
             var msg = new ClientGCMsgProtobuf<CMsgGCToClientDevPlaytestStatus>(packetMsg);
             DevPlaytestStatusEvent?.Invoke(this, new DevPlaytestStatusEventArgs() { Data = msg.Body });
         }
