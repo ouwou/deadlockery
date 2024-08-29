@@ -21,6 +21,8 @@ namespace DeadlockAPI {
 
         const int APPID = 1422450;
 
+        uint clientVersion = 0;
+
         public DeadlockClient(string userName, string password) {
             this.userName = userName;
             this.password = password;
@@ -131,14 +133,20 @@ namespace DeadlockAPI {
             func(callback.Message);
         }
 
-        public async Task<U> SendAndReceiveWithJob<T, U>(ClientGCMsgProtobuf<T> msg)
+        public async Task<U?> SendAndReceiveWithJob<T, U>(ClientGCMsgProtobuf<T> msg)
             where T : ProtoBuf.IExtensible, new()
             where U : ProtoBuf.IExtensible, new() {
             msg.SourceJobID = client.GetNextJobID();
             gameCoordinator.Send(msg, APPID);
-            var cb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
-            var response = new ClientGCMsgProtobuf<U>(cb.Message);
-            return response.Body;
+            try {
+                var cb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
+                var response = new ClientGCMsgProtobuf<U>(cb.Message);
+
+                return response.Body;
+            } catch (Exception e) {
+                Console.Write(e.ToString());
+                return default;
+            }
         }
 
         public class MatchMetaData {
@@ -165,9 +173,20 @@ namespace DeadlockAPI {
             return await SendAndReceiveWithJob<CMsgClientToGCGetGlobalMatchHistory, CMsgClientToGCGetGlobalMatchHistoryResponse>(msg);
         }
 
+        public async Task<CMsgClientToGCSpectateLobbyResponse?> SpectateLobby(ulong lobbyId) {
+            var msg = new ClientGCMsgProtobuf<CMsgClientToGCSpectateLobby>((uint)EGCCitadelClientMessages.k_EMsgClientToGCSpectateLobby);
+            msg.Body.lobby_id = lobbyId;
+            msg.Body.client_version = clientVersion;
+            return await SendAndReceiveWithJob<CMsgClientToGCSpectateLobby, CMsgClientToGCSpectateLobbyResponse>(msg);
+        }
+
         public async Task<CMsgClientToGCGetActiveMatchesResponse?> GetActiveMatches() {
             var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetActiveMatches>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetActiveMatches);
-            return await SendAndReceiveWithJob<CMsgClientToGCGetActiveMatches, CMsgClientToGCGetActiveMatchesResponse>(msg);
+            msg.SourceJobID = client.GetNextJobID();
+            gameCoordinator.Send(msg, APPID);
+            var cb = await new AsyncJob<SteamGameCoordinator.MessageCallback>(client, msg.SourceJobID);
+            var decompressed = Snappier.Snappy.DecompressToArray(new ReadOnlySpan<byte>(cb.Message.GetData(), 24, cb.Message.GetData().Length - 24));
+            return ProtoBuf.Serializer.Deserialize<CMsgClientToGCGetActiveMatchesResponse>(new ReadOnlySpan<byte>(decompressed));
         }
 
         public class ClientWelcomeEventArgs : EventArgs {
@@ -176,6 +195,7 @@ namespace DeadlockAPI {
         public event EventHandler<ClientWelcomeEventArgs> ClientWelcomeEvent;
         void OnClientWelcome(IPacketGCMsg packetMsg) {
             var msg = new ClientGCMsgProtobuf<CMsgClientWelcome>(packetMsg);
+            clientVersion = msg.Body.version;
             ClientWelcomeEvent?.Invoke(this, new ClientWelcomeEventArgs() { Data = msg.Body });
         }
 

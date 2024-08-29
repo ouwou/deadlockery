@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Snappier" Version="1.1.6" />
     <PackageReference Include="SteamKit2" Version="2.5.0" />
   </ItemGroup>
 
