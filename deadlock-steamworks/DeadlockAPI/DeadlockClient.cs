@@ -167,12 +167,6 @@ namespace DeadlockAPI {
             };
         }
 
-        public async Task<CMsgClientToGCGetGlobalMatchHistoryResponse?> GetGlobalMatchHistory(uint cursor = 0) {
-            var msg = new ClientGCMsgProtobuf<CMsgClientToGCGetGlobalMatchHistory>((uint)EGCCitadelClientMessages.k_EMsgClientToGCGetGlobalMatchHistory);
-            msg.Body.cursor = cursor;
-            return await SendAndReceiveWithJob<CMsgClientToGCGetGlobalMatchHistory, CMsgClientToGCGetGlobalMatchHistoryResponse>(msg);
-        }
-
         public async Task<CMsgClientToGCSpectateLobbyResponse?> SpectateLobby(ulong lobbyId) {
             var msg = new ClientGCMsgProtobuf<CMsgClientToGCSpectateLobby>((uint)EGCCitadelClientMessages.k_EMsgClientToGCSpectateLobby);
             msg.Body.lobby_id = lobbyId;

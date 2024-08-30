@@ -14,14 +14,13 @@ namespace deadlockery
 
         public static void Main(string[] args)
         {
-            if (args.Length < 3)
+            if (args.Length < 2)
             {
-                Console.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <steam username> <steam password> <match id>");
+                Console.WriteLine($"Usage: {AppDomain.CurrentDomain.FriendlyName} <steam username> <steam password>");
                 return;
             }
 
             client = new DeadlockClient(args[0], args[1]);
-            uint.TryParse(args[2], out testMatchId);
 
             client.ClientWelcomeEvent += OnWelcome;
 
@@ -66,7 +65,7 @@ namespace deadlockery
                 {
                     var steamId = new SteamID(player.account_id, EUniverse.Public, EAccountType.Individual);
                     var steamUrl = $"https://steamcommunity.com/profiles/{steamId.ConvertToUInt64()}";
-                    Console.WriteLine($"Player {player.player_slot}:");
+                    Console.WriteLine($"Player {player.player_slot} ({player.account_id}):");
                     Console.WriteLine($"    URL: {steamUrl}");
                     Console.WriteLine($"    Hero: {(DeadlockAPI.Enums.Heroes)player.hero_id}");
                     Console.WriteLine($"    Won?: {(player.team == matchMetaDataContents.match_info.winning_team ? "Yes" : "No")}");
@@ -79,7 +78,8 @@ namespace deadlockery
 
         private static async void OnWelcome(object? sender, DeadlockClient.ClientWelcomeEventArgs e)
         {
-            GetMatchMetaDataExample(testMatchId);
+            // var matches = await client.GetActiveMatches();
+            var m = await client.SpectateLobby(100996279194259060);
         }
     }
 }

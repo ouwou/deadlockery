@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeadlockMatchInfoServer", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlockMatchScraper", "DeadlockMatchScraper\DeadlockMatchScraper.csproj", "{D8947AE8-9655-4B84-B8F8-170EB706006F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadlockMetaScraper", "DeadlockMetaScraper\DeadlockMetaScraper.csproj", "{34492FAF-2637-4A88-8870-4E2148F26915}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8947AE8-9655-4B84-B8F8-170EB706006F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34492FAF-2637-4A88-8870-4E2148F26915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34492FAF-2637-4A88-8870-4E2148F26915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34492FAF-2637-4A88-8870-4E2148F26915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34492FAF-2637-4A88-8870-4E2148F26915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,4 +11,8 @@
     <PackageReference Include="SteamKit2" Version="2.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Generated\" />
+  </ItemGroup>
+
 </Project>

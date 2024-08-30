@@ -2306,16 +2306,6 @@ namespace ouwou.GC.Deadlock.Internal
             public void Resetplayer_assists() => __pbn__player_assists = null;
             private uint? __pbn__player_assists;
 
-            [global::ProtoBuf.ProtoMember(10)]
-            public uint objectives_mask_legacy
-            {
-                get => __pbn__objectives_mask_legacy.GetValueOrDefault();
-                set => __pbn__objectives_mask_legacy = value;
-            }
-            public bool ShouldSerializeobjectives_mask_legacy() => __pbn__objectives_mask_legacy != null;
-            public void Resetobjectives_mask_legacy() => __pbn__objectives_mask_legacy = null;
-            private uint? __pbn__objectives_mask_legacy;
-
             [global::ProtoBuf.ProtoMember(11)]
             public uint last_hits
             {
@@ -2919,79 +2909,6 @@ namespace ouwou.GC.Deadlock.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetGlobalMatchHistory : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong cursor
-        {
-            get => __pbn__cursor.GetValueOrDefault();
-            set => __pbn__cursor = value;
-        }
-        public bool ShouldSerializecursor() => __pbn__cursor != null;
-        public void Resetcursor() => __pbn__cursor = null;
-        private ulong? __pbn__cursor;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint hero_id
-        {
-            get => __pbn__hero_id.GetValueOrDefault();
-            set => __pbn__hero_id = value;
-        }
-        public bool ShouldSerializehero_id() => __pbn__hero_id != null;
-        public void Resethero_id() => __pbn__hero_id = null;
-        private uint? __pbn__hero_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetGlobalMatchHistoryResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(EResult.k_eInternalError)]
-        public EResult result
-        {
-            get => __pbn__result ?? EResult.k_eInternalError;
-            set => __pbn__result = value;
-        }
-        public bool ShouldSerializeresult() => __pbn__result != null;
-        public void Resetresult() => __pbn__result = null;
-        private EResult? __pbn__result;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<CMsgDevMatchInfo> matches { get; } = new global::System.Collections.Generic.List<CMsgDevMatchInfo>();
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public ulong next_cursor
-        {
-            get => __pbn__next_cursor.GetValueOrDefault();
-            set => __pbn__next_cursor = value;
-        }
-        public bool ShouldSerializenext_cursor() => __pbn__next_cursor != null;
-        public void Resetnext_cursor() => __pbn__next_cursor = null;
-        private ulong? __pbn__next_cursor;
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum EResult
-        {
-            k_eInternalError = 0,
-            k_eSuccess = 1,
-            k_eDisabled = 2,
-            k_eTooBusy = 3,
-            k_eRateLimited = 4,
-            k_eInvalidPermissions = 5,
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgClientToGCGetMatchMetaData : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -3007,16 +2924,6 @@ namespace ouwou.GC.Deadlock.Internal
         public bool ShouldSerializematch_id() => __pbn__match_id != null;
         public void Resetmatch_id() => __pbn__match_id = null;
         private ulong? __pbn__match_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint access_as_account_id
-        {
-            get => __pbn__access_as_account_id.GetValueOrDefault();
-            set => __pbn__access_as_account_id = value;
-        }
-        public bool ShouldSerializeaccess_as_account_id() => __pbn__access_as_account_id != null;
-        public void Resetaccess_as_account_id() => __pbn__access_as_account_id = null;
-        private uint? __pbn__access_as_account_id;
 
         [global::ProtoBuf.ProtoMember(3)]
         public uint metadata_salt
@@ -3107,6 +3014,8 @@ namespace ouwou.GC.Deadlock.Internal
             k_eResult_TemporarilyDisabled = 3,
             k_eResult_TooBusy = 4,
             k_eResult_RateLimited = 5,
+            k_eResult_InvalidMatch = 6,
+            k_eResult_MatchInFlight = 7,
         }
 
     }
@@ -4030,59 +3939,6 @@ namespace ouwou.GC.Deadlock.Internal
             eResponse_AlreadyHasGame = 5,
             eResponse_LimitedUser = 6,
             eResponse_InviteLimitReached = 7,
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetDevMatchInfo : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong match_id
-        {
-            get => __pbn__match_id.GetValueOrDefault();
-            set => __pbn__match_id = value;
-        }
-        public bool ShouldSerializematch_id() => __pbn__match_id != null;
-        public void Resetmatch_id() => __pbn__match_id = null;
-        private ulong? __pbn__match_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgClientToGCGetDevMatchInfoResponse : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue(EResponse.eResponse_Success)]
-        public EResponse response
-        {
-            get => __pbn__response ?? EResponse.eResponse_Success;
-            set => __pbn__response = value;
-        }
-        public bool ShouldSerializeresponse() => __pbn__response != null;
-        public void Resetresponse() => __pbn__response = null;
-        private EResponse? __pbn__response;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public CMsgDevMatchInfo match_info { get; set; }
-
-        [global::ProtoBuf.ProtoContract()]
-        public enum EResponse
-        {
-            eResponse_Success = 0,
-            eResponse_InternalError = 1,
-            eResponse_RateLiimited = 2,
-            eResponse_NoPermission = 3,
-            eResponse_InvalidMatch = 4,
-            eResponse_MatchInFlight = 5,
         }
 
     }
@@ -5238,6 +5094,16 @@ namespace ouwou.GC.Deadlock.Internal
         public void Resetspectating_lobby_id() => __pbn__spectating_lobby_id = null;
         private ulong? __pbn__spectating_lobby_id;
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool stopped_spectating
+        {
+            get => __pbn__stopped_spectating.GetValueOrDefault();
+            set => __pbn__stopped_spectating = value;
+        }
+        public bool ShouldSerializestopped_spectating() => __pbn__stopped_spectating != null;
+        public void Resetstopped_spectating() => __pbn__stopped_spectating = null;
+        private bool? __pbn__stopped_spectating;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -5274,8 +5140,6 @@ namespace ouwou.GC.Deadlock.Internal
         k_EMsgClientToGCGetMatchHistoryResponse = 9113,
         k_EMsgClientToGCSpectateUser = 9116,
         k_EMsgClientToGCSpectateUserResponse = 9117,
-        k_EMsgClientToGCGetGlobalMatchHistory = 9118,
-        k_EMsgClientToGCGetGlobalMatchHistoryResponse = 9119,
         k_EMsgClientToGCPartyCreate = 9123,
         k_EMsgClientToGCPartyCreateResponse = 9124,
         k_EMsgClientToGCPartyLeave = 9125,
@@ -5322,8 +5186,6 @@ namespace ouwou.GC.Deadlock.Internal
         k_EMsgGCToClientBookUpdated = 9188,
         k_EMsgClientToGCSubmitPlaytestUser = 9189,
         k_EMsgClientToGCSubmitPlaytestUserResponse = 9190,
-        k_EMsgClientToGCGetDevMatchInfo = 9191,
-        k_EMsgClientToGCGetDevMatchInfoResponse = 9192,
         k_EMsgClientToGCUpdateHeroBuild = 9193,
         k_EMsgClientToGCUpdateHeroBuildResponse = 9194,
         k_EMsgClientToGCFindHeroBuilds = 9195,
