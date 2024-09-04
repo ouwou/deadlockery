@@ -1,4 +1,5 @@
-﻿using ouwou.GC.Deadlock.Internal;
+﻿using DeadlockAPI.Enums;
+using ouwou.GC.Deadlock.Internal;
 using SteamKit2;
 using SteamKit2.Authentication;
 using SteamKit2.GC;
@@ -172,6 +173,12 @@ namespace DeadlockAPI {
             msg.Body.lobby_id = lobbyId;
             msg.Body.client_version = clientVersion;
             return await SendAndReceiveWithJob<CMsgClientToGCSpectateLobby, CMsgClientToGCSpectateLobbyResponse>(msg);
+        }
+
+        public async Task<CMsgClientToGCFindHeroBuildsResponse?> FindHeroBuilds(Heroes hero) {
+            var msg = new ClientGCMsgProtobuf<CMsgClientToGCFindHeroBuilds>((uint)EGCCitadelClientMessages.k_EMsgClientToGCFindHeroBuilds);
+            msg.Body.hero_id = (uint)hero;
+            return await SendAndReceiveWithJob<CMsgClientToGCFindHeroBuilds, CMsgClientToGCFindHeroBuildsResponse>(msg);
         }
 
         public async Task<CMsgClientToGCGetActiveMatchesResponse?> GetActiveMatches() {
