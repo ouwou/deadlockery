@@ -34,11 +34,10 @@ namespace Builds {
         }
 
         private static async void OnWelcome(object? sender, DeadlockClient.ClientWelcomeEventArgs e) {
-            isRunning = false;
-
             var builds = await client.FindHeroBuilds(Heroes.Ivy);
             if (builds == null || builds.response != ouwou.GC.Deadlock.Internal.CMsgClientToGCFindHeroBuildsResponse.EResponse.k_eSuccess) {
                 Console.WriteLine("Error finding builds");
+                isRunning = false;
                 return;
             }
 
@@ -55,6 +54,8 @@ namespace Builds {
                     Console.WriteLine();
                 }
             }
+
+            isRunning = false;
         }
     }
 }
