@@ -57,11 +57,21 @@ namespace kv3bs {
     }
     internal class Program {
         static void Main(string[] args) {
+            string cmd = args[0];
+            string path = args[1];
             using var package = new Package();
 
-            package.Read("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Deadlock\\game\\citadel\\pak01_dir.vpk");
-            foreach (var entry in package.Entries["vdata_c"]) {
-                HandleVDataEntry(package, entry);
+            package.Read(path);
+            if (cmd == "list") {
+                var set = new HashSet<ushort>();
+                foreach (var entry in package.Entries["vdata_c"]) {
+                    set.Add(entry.ArchiveIndex);
+                }
+                Console.WriteLine("regex:(citadel/pak01_dir|" + string.Join("|", set.Select(num => "citadel/pak01_" + num.ToString("D3"))) + ")");
+            } else if (cmd == "json") {
+                foreach (var entry in package.Entries["vdata_c"]) {
+                    HandleVDataEntry(package, entry);
+                }
             }
 
         }

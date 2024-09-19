@@ -1,9 +1,5 @@
 # deadlock tools
 
-### [deadlock-demo-parser](./deadlock-demo-parser)
-
-wip c++ parser for .dem demo files
-
 ### [deadlock-dumper](./deadlock-dumper)
 
 hacky injectable for extracting names for internal subclass ids
@@ -16,10 +12,17 @@ other bits of data that arent directly from vdata files
 
 c# programs for interacting with the deadlock game coordinator
 
-### [deadlock-vdata](./deadlock-vdata)
+### deadlock-vdata
 
-vdata files including hero and item information in usable json
+moved. see: https://github.com/ouwou/deadlock-data-tracking/
 
 ### [kv3bs](./kv3s)
 
 dumps all vdata files into json
+
+### ~~deadlock-demo-parser~~
+
+probably wont finish this. see: 
+
+- [DemLockSharp](https://github.com/OpenSource-Deadlock-Tools/DemLockSharp/)
+- [haste](https://github.com/blukai/haste/)
